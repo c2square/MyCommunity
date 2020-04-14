@@ -22,3 +22,15 @@ spring.datasource.driver-class-name=your database driver (for example:org.h2.Dri
 ## 所用到的技术的网址：
 
 [github登录](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
+
+##遇到的问题
+
+- 登录时，返回出错
+    1. 连接超时
+        - api.github.com的ping不通，修改host
+    2. 其他问题看报错信息，输出中间结果在查看
+- 数据库连接不上，总是提示用户名或密码不对
+    - 不知道是不是mysql和H2数据库的管理权限出问题，查了半天也没找到原因
+    - 解决方法（缓兵之计）：换数据库名字+换用户名和密码，一直尝试，总会成功
+- flayway无法合并版本，只有`Detected failed migration to version x`的警告信息
+    - 找到flyway_schema_history这个表，删除失败上传的记录（该表最后一个参数是success）重试即可。（这个bug很蛋疼）
