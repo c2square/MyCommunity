@@ -26,11 +26,19 @@ spring.datasource.driver-class-name=your database driver (for example:org.h2.Dri
 ##遇到的问题
 
 - 登录时，返回出错
-    1. 连接超时
+    - 连接超时
         - api.github.com的ping不通，修改host
-    2. 其他问题看报错信息，输出中间结果在查看
+    - 其他问题看报错信息，输出中间结果在查看
 - 数据库连接不上，总是提示用户名或密码不对
     - 不知道是不是mysql和H2数据库的管理权限出问题，查了半天也没找到原因
     - 解决方法（缓兵之计）：换数据库名字+换用户名和密码，一直尝试，总会成功
 - flayway无法合并版本，只有`Detected failed migration to version x`的警告信息
     - 找到flyway_schema_history这个表，删除失败上传的记录（该表最后一个参数是success）重试即可。（这个bug很蛋疼）
+    - 其他一般都有报错信息，如语法错误等
+- 写html时，css无法正确显示
+    - 在浏览器F12查看css是否正确加载（Sources选项卡里）
+    - 如果css能被加载，但内容不正确
+        - 比如显示的内容为HTML代码，而不是自己写的css内容
+        - 说明该页面的Controller写错了
+        - 查看@GetMapping注解有没有写对
+            - 如`@GetMapping("/publish")`写错成`@GetMapping`（流下辛酸泪）
